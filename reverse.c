@@ -41,6 +41,35 @@ void print(struct node *head)
     printf("\n");
 }
 
+// 整个列表反序
+struct node *reverse_all(struct node *head)
+{
+    struct node *done = NULL;
+    while (head)
+    {
+        struct node *remain = head->next;
+        head->next = done;
+        done = head;
+        head = remain;
+    }
+    return done;
+}
+
+// 奇数和偶数对反序
+struct node *reverse_pair(struct node *head)
+{
+    struct node **pp = &head;
+    struct node *p1, *p2;
+    while ((p1 = *pp) && (p2 = p1->next))
+    {
+        p1->next = p2->next;
+        p2->next = p1;
+        *pp = p2;
+        pp = &p1->next;
+    }
+    return head;
+}
+
 int main(int argc, const char * argv[])
 {
     int n = 9;
@@ -50,6 +79,12 @@ int main(int argc, const char * argv[])
         arr[i] = i;
     }
     struct node *list = build(arr, n);
+    print(list);
+    printf("-----reverse all-----\n");
+    list = reverse_all(list);
+    print(list);
+    printf("-----reverse pair-----\n");
+    list = reverse_pair(list);
     print(list);
     return 0;
 }
