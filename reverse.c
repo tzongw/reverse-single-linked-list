@@ -70,6 +70,27 @@ struct node *reverse_pair(struct node *head)
     return head;
 }
 
+struct node *reverse_k(struct node *head, int k)
+{
+    struct node **pp = &head;
+    for (;;)
+    {
+        int c = 0;
+        struct node **pk;
+        for (pk = pp; *pk && c < k; c++, pk = &(*pk)->next)
+            ;
+        if (c < k)
+            break;
+        struct node *pn = *pk, *p1 = *pp;
+        *pk = NULL;
+        *pp = reverse_all(*pp);
+        p1->next = pn;
+        pp = &p1->next;
+        
+    }
+    return head;
+}
+
 int main(int argc, const char * argv[])
 {
     int n = 9;
@@ -81,10 +102,16 @@ int main(int argc, const char * argv[])
     struct node *list = build(arr, n);
     print(list);
     printf("-----reverse all-----\n");
+    list = build(arr, n);
     list = reverse_all(list);
     print(list);
     printf("-----reverse pair-----\n");
+    list = build(arr, n);
     list = reverse_pair(list);
+    print(list);
+    list = build(arr, n);
+    printf("-----reverse k-----\n");
+    list = reverse_k(list, 3);
     print(list);
     return 0;
 }
