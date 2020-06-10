@@ -75,9 +75,9 @@ struct node *reverse_k(struct node *head, int k)
     struct node **pp = &head, *p1;
     while ((p1 = *pp))
     {
-        int c = 0;
+        int c = 1;
         struct node *p;
-        for (p = p1; p && c < k; c++)
+        for (p = p1->next; p && c < k; c++)
         {
             struct node *q = p->next;
             p->next = *pp;
