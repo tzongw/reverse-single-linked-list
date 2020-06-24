@@ -85,13 +85,7 @@ struct node *reverse_k(struct node *head, int k)
             p = q;
         }
         p1->next = p;
-        if (c < k)
-        {
-            *pp = reverse_k(*pp, c);
-            break;
-        }
-        else
-            pp = &p1->next;
+        pp = &p1->next;
     }
     return head;
 }
